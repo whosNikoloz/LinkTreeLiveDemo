@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LinkTree Demo</title>
+    <link  href="/css/navbar.css" rel="stylesheet" />
+    <link href="/css/footer.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+
+
+    <link href="/css/LoginForm.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <nav id="navbar">
+        <a href="home.html">
+            <img src="/images/Navbar/linktree-low-resolution-logo-color-on-transparent-background.png" class="logo" />
+        </a>
+        <img src="/images/Navbar/user.png" class="user-pic" onclick="toggleMenu()">
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <div class="user-info">
+                    <img src="/images/Navbar/user.png">
+                    <h2>Nikoloz</h2>
+                </div>
+                <hr>
+            </div>
+            <a href="userpanel.html" class="sub-menu-link">
+                <i class="fa fa-user" style="color: white;" aria-hidden="true"></i>
+                <p>Edit Profile</p>
+            </a>
+            <a href="authentication.html" class="sub-menu-link">
+                <i class="fa fa-user" style="color: white;" aria-hidden="true"></i>
+                <p>Authentication</p>
+            </a>
+            <a href="#" class="sub-menu-link">
+                <i class="fa fa-question-circle" style="color: white;" aria-hidden="true"></i>
+                <p>Help</p>
+            </a>
+            <a asp-controller="Account" asp-action="Logout" class="sub-menu-link">
+                <i class="fas fa-sign-out-alt" style="color: white;" aria-hidden="true"></i>
+                <p>Logout</p>
+            </a>
+
+        </div>
+    </nav>
+    <!---Content-->
+    <main>
+        <div class="section">
+            <div class="container">
+                <div class="row full-height justify-content-center">
+                    <div class="col-12 text-center align-self-center py-5">
+                        <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                            <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                            <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                            <label for="reg-log"></label>
+                            <div class="card-3d-wrap mx-auto">
+                                <div class="card-3d-wrapper">
+                                    <div class="card-front">
+                                        <div class="center-wrap">
+                                            <div class="section text-center">
+                                                <h4 class="mb-4 pb-3" style="color: white;">Log In</h4>
+                                                <form method="post" asp-controller="Account" asp-action="SingIn">
+                                                    <div class="form-group">
+                                                        <input type="email" asp-for="userLogin.Email" class="form-style" placeholder="Your Email" autocomplete="off">
+                                                        <i class="input-icon fa fa-envelope"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="password" asp-for="userLogin.Password" class="form-style" placeholder="Your Password"  autocomplete="off">
+                                                        <i class="input-icon fa fa-unlock"></i>
+                                                        <span style="color: red;font-size:16px;">@ViewBag.ErrorMessage</span>
+                                                    </div>
+                                                    <button type="submit" class="btn mt-4">Submit</button>
+                                                </form>
+                                                <p class="mb-0 mt-4 text-center"><a asp-action="ForgetPassword" asp-controller="account" class="link">Forgot your password?</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-back">
+                                        <div class="center-wrap">
+                                            <div class="section text-center">
+                                                <h4 class="mb-4 pb-3" style="color: white;">Sign Up</h4>
+                                                <form method="post" asp-controller="Account" asp-action="SignUp" onsubmit="return validateSignUpPassword()">
+                                                    <div class="form-group">
+                                                        <input type="text" asp-for="userRegister.UserName" class="form-style" placeholder="Your Full Name" autocomplete="off">
+                                                        <i class="input-icon fa fa-user"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="email" asp-for="userRegister.Email" class="form-style" placeholder="Your Email" autocomplete="off">
+                                                        <i class="input-icon fa fa-envelope"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="text" asp-for="userRegister.PhoneNumber" class="form-style" placeholder="Your Password" autocomplete="off">
+                                                        <i class="input-icon fa fa-mobile"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="password" asp-for="userRegister.Password" class="form-style" placeholder="Your Password" autocomplete="off">
+                                                        <i class="input-icon fa fa fa-unlock"></i>
+                                                    </div>
+                                                    <div class="form-group mt-2">
+                                                        <input type="password" asp-for="userRegister.ConfirmPassword" class="form-style" placeholder="Confirm Password" autocomplete="off">
+                                                        <i class="input-icon fa fa fa-unlock"></i>
+                                                        <span id="signUpPasswordError" style="color: red;font-size:9px;"></span>
+                                                    </div>
+                                                    <button type="submit" class="btn mt-4">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+    <!--- Footer-->
+    <footer class="new_footer_area bg_color">
+        <div class="new_footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="f_widget company_widget wow fadeInLeft" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInLeft;">
+                            <h3 class="f-title f_600 t_color f_size_18">Get in Touch</h3>
+                            <p>Don't miss any updates of our new templates and extensions.!</p>
+                            <form action="#" class="f_subscribe_two mailchimp" method="post" novalidate="true" _lpchecked="1">
+                                <input type="text" name="EMAIL" class="form-control memail" placeholder="Email">
+                                <button class="btn btn_get btn_get_two" type="submit">Subscribe</button>
+                                <p class="mchimp-errmessage" style="display: none;"></p>
+                                <p class="mchimp-sucmessage" style="display: none;"></p>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInLeft;">
+                            <h3 class="f-title f_600 t_color f_size_18">Download</h3>
+                            <ul class="list-unstyled f_list">
+                                <li><a href="#">Company</a></li>
+                                <li><a href="#">Android App</a></li>
+                                <li><a href="#">ios App</a></li>
+                                <li><a href="#">Desktop</a></li>
+                                <li><a href="#">Projects</a></li>
+                                <li><a href="#">My tasks</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="f_widget about-widget pl_70 wow fadeInLeft" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInLeft;">
+                            <h3 class="f-title f_600 t_color f_size_18">Help</h3>
+                            <ul class="list-unstyled f_list">
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Term &amp; conditions</a></li>
+                                <li><a href="#">Reporting</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">Support Policy</a></li>
+                                <li><a href="#">Privacy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="f_widget social-widget pl_70 wow fadeInLeft" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInLeft;">
+                            <h3 class="f-title f_600 t_color f_size_18">Team Solutions</h3>
+                            <div class="f_social_icon">
+                                <a href="https://www.facebook.com/profile.php?id=100009152091053" class="fab fa-facebook"></a>
+                                <a href="https://twitter.com/kobaidze0" class="fab fa-twitter"></a>
+                                <a href="https://www.linkedin.com/in/nikoloz-kobaidze-298a35254/" class="fab fa-linkedin"></a>
+                                <a href="https://www.instagram.com/kobaidze0/" class="fab fa-instagram"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer_bg">
+                <div class="footer_bg_one"></div>
+                <div class="footer_bg_two"></div>
+            </div>
+        </div>
+
+    </footer>
+
+    <!--Scripts-->
+    <script>
+        function validateSignUpPassword() {
+            var newPassword = document.getElementById("userRegister_Password").value;
+            var confirmPassword = document.getElementById("userRegister_ConfirmPassword").value;
+    
+            // Check if the passwords match
+            if (newPassword !== confirmPassword) {
+                document.getElementById("signUpPasswordError").innerText = "Passwords do not match.";
+                return false; // Prevent form submission
+            } else {
+                document.getElementById("signUpPasswordError").innerText = ""; // Clear error message
+                return true; // Allow form submission
+            }
+        }
+    </script>
+    <script src="/js/Navbar.js"></script>
+</body>
+</html>
